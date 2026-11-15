@@ -90,7 +90,7 @@ local function startRunFor(player)
 	state.coins = 0
 	state.collected = {}
 	state.won = false
-	state.startTime = os.clock()
+	state.startTime = tick()
 	state.checkpointIndex = 0
 	state.checkpoint = SPAWN_POSITION
 	resetCoins()
@@ -209,7 +209,7 @@ for _, pad in ipairs(partsNamed("Finish")) do
 			return
 		end
 		state.won = true
-		local finishTime = os.clock() - state.startTime
+		local finishTime = tick() - state.startTime
 		local best = player:GetAttribute("BestTime")
 		if not best or finishTime < best then
 			player:SetAttribute("BestTime", finishTime)
@@ -222,7 +222,7 @@ end
 -- Every frame: spin the coins, slide the moving platforms (carrying their
 -- riders), and rescue anyone who fell past the lava.
 RunService.Heartbeat:Connect(function()
-	local now = os.clock()
+	local now = tick()
 	for _, coin in ipairs(coins) do
 		if not coin.taken then
 			coin.part.CFrame = coin.baseCFrame * CFrame.Angles(0, now * Config.COIN_SPIN_SPEED, 0)

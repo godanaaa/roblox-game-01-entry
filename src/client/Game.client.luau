@@ -197,7 +197,7 @@ gui.Parent = player:WaitForChild("PlayerGui")
 
 local function beginRun()
 	coinsLabel.Text = "Coins: 0 / " .. tostring(TOTAL_COINS)
-	runStartTime = os.clock()
+	runStartTime = tick()
 	startFrame.Visible = false
 	winFrame.Visible = false
 	hudFrame.Visible = true
@@ -230,6 +230,6 @@ end)
 -- screen shows the server's own measured time, which is the one that counts.
 RunService.RenderStepped:Connect(function()
 	if runStartTime then
-		timerLabel.Text = "Time: " .. formatTime(os.clock() - runStartTime)
+		timerLabel.Text = "Time: " .. formatTime(tick() - runStartTime)
 	end
 end)
